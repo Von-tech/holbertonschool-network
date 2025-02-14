@@ -8,8 +8,12 @@ sudo cp /etc/hosts /etc/hosts.bak
 sudo sed -i '/127.0.0.1\s*localhost/d' /etc/hosts
 sudo sed -i '/facebook.com/d' /etc/hosts
 
-# Adding new entries for facebook
+# Adding new entries for localhost and facebook
 echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts > /dev/null
 echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
+
+# Diagnostic check to confirm changes
+echo "Updated /etc/hosts:"
+sudo cat /etc/hosts
 
 echo "Host resolution updated: localhost -> 127.0.0.2, facebook.com -> 8.8.8.8"
