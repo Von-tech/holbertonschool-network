@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#config port 88
+nc localhost 98

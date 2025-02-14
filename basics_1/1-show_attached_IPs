@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# ipv4 
+ifconfig | grep -w "inet" | cut -d " " -f 10
