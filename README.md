@@ -1,4 +1,4 @@
-Introduction:
+**What happens when you type google.com in your browser and press Enter**
 
 When you type a URL such as https://www.google.com in your browser and press Enter, an intricate series of processes happen behind the scenes before the Google homepage appears on your screen. In this post, we’ll dive deep into the technical steps, exploring concepts like DNS requests, TCP/IP, firewalls, SSL/TLS, load balancers, web servers, application servers, and databases.
 
