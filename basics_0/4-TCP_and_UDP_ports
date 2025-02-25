@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
-# This script print the ports  open and the programs associated to this ports.
+# This script displays all active listening TCP and UDP ports with their corresponding PID and program name.
 
-netstat -tulnp
+# Show listening sockets for TCP and UDP with the PID and program name
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+ss -tuln | grep -E '^(tcp|udp)' | awk '{print $1, $2, $3, $4, $5, $6}' | while read proto recv send local_address foreign_address state pid_program; do
+    # Extract PID and program name
+    pid=$(echo $pid_program | cut -d'/' -f1)
+    program_name=$(echo $pid_program | cut -d'/' -f2)
+
+    # Format the local address to match the expected spacing
+    printf "%-8s %-8s %-8s %-24s %-24s %-12s %-s\n" "$proto" "$recv" "$send" "$local_address" "$foreign_address" "$state" "$pid/$program_name"
+done
+
