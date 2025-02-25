@@ -12,8 +12,16 @@ sudo sed -i '/facebook.com/d' /etc/hosts
 echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts > /dev/null
 echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
 
+# Restart the network service to apply changes (optional based on your system)
+sudo systemctl restart NetworkManager  # You can also use `sudo service networking restart` on some systems
+
 # Diagnostic check to confirm changes
 echo "Updated /etc/hosts:"
 sudo cat /etc/hosts
 
+# Ping localhost to verify it resolves to 127.0.0.2
+echo "Pinging localhost..."
+ping -c 1 localhost
+
 echo "Host resolution updated: localhost -> 127.0.0.2, facebook.com -> 8.8.8.8"
+
