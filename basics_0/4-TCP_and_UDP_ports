@@ -1,14 +1,9 @@
-#!/usr/bin/env bash
-# This script displays active TCP and UDP listening ports with PID and program name.
+#!/bin/bash
 
-# Use ss to show listening sockets along with their PID and program name
-ss -tuln | grep -E '^(tcp|udp)' | awk '{print $1, $5, $6}' | while read proto local pid_program; do
-# Extract PID and program name
-	pid=$(echo $pid_program | cut -d'/' -f1)
-	program_name=$(echo $pid_program | cut -d'/' -f2)
+# Displaying listening TCP and UDP ports with PID and program name
+echo "Active Internet connections (only servers)"
+ss -tuln | awk 'NR==1; NR > 1 {print "Proto " $1 " " $2 " " $3 " " $4 " " $5 " " $6 " " $7 " " $8}'
 
-# Display the result in the correct format
-	echo "$proto $local LISTEN $pid/$program_name"
-done
-
-
+echo ""
+echo "Active UNIX domain sockets (only servers)"
+ss -x -a | awk 'NR==1; NR > 1 {print "Proto " $1 " " $2 " " $3 " " $4 " " $5 " " $6 " " $7 " " $8}'
