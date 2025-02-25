@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
-#Use ping for verificay red
-if [ "$#" -eq "1" ];
-then
-  ping -c 5 "$1"
-fi
-if [ "$#" -eq "0" ]
-then
-  echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
-fi
+# This script displays all listening TCP/UDP sockets along with their PID and program names
+
+# Display listening TCP/UDP ports with associated program names and PIDs
+ss -tuln | awk 'NR>1 {print $1, $5, $6, $7}' 
+
